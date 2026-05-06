@@ -1,0 +1,10 @@
+coco_dbt_project:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      role: SYSADMIN
+      warehouse: COMPUTE_WH
+      database: ENT_INV_PROD_PL_DB
+      schema: INV_DM
+      threads: 8
