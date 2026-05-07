@@ -17,3 +17,9 @@ snapshot-paths:
 models:
   coco_dbt_project:
     +materialized: view
+    staging:
+      +materialized: view
+    integration:
+      +materialized: table
+    presentation:
+      +materialized: incremental

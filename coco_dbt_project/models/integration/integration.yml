@@ -1,0 +1,75 @@
+version: 2
+
+models:
+  - name: int_property_loans
+    description: Integration model combining property, fund, and loan data for downstream analytics.
+
+    columns:
+      - name: asset_id_reo
+        description: Unique property asset identifier.
+
+      - name: asset_description
+        description: Description of the property asset.
+
+      - name: property_type
+        description: Type of property.
+
+      - name: location
+        description: Location of the property.
+
+      - name: state
+        description: US state where the property is located.
+
+      - name: company
+        description: Company managing the property.
+
+      - name: total_debt
+        description: Total debt associated with the property.
+
+      - name: real_estate_market_value
+        description: Current market value of the property.
+
+      - name: property_strategy
+        description: Investment strategy for the property.
+
+      - name: as_of_date
+        description: Reporting date for the property record.
+
+      - name: fund_id
+        description: Unique identifier for the fund.
+
+      - name: fund_name
+        description: Name of the fund.
+
+      - name: legal_entity_name
+        description: Legal entity name associated with the fund.
+
+      - name: vintage_year
+        description: Year the fund was established.
+
+      - name: fund_strategy
+        description: Investment strategy of the fund.
+
+      - name: fund_status
+        description: Current status of the fund.
+
+      - name: loan_number
+        description: Unique loan identifier.
+
+      - name: loan_asset_desc
+        description: Description of the loan asset.
+
+      - name: asset_mgr
+        description: Asset manager responsible for the loan.
+
+      - name: book_value_stat
+        description: Statistical book value of the loan.
+
+      - name: collateral_state
+        description: State where the loan collateral is located.
+
+      - name: collateral_type
+        description: Type of collateral securing the loan.
+
+      - name: load_date
+        description: Timestamp when the record was loaded.

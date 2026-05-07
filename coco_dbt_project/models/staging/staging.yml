@@ -1,0 +1,131 @@
+version: 2
+
+models:
+  - name: stg_yardi_fund
+    description: Staging model for Yardi fund data.
+
+    columns:
+      - name: fund_id
+        description: Unique identifier for the fund.
+        tests:
+          - unique
+          - not_null
+
+      - name: fund_name
+        description: Name of the fund.
+        tests:
+          - not_null
+
+      - name: legal_entity_name
+        description: Legal entity name associated with the fund.
+
+      - name: vintage_year
+        description: Year the fund was established.
+
+      - name: strategy
+        description: Investment strategy of the fund.
+
+      - name: status
+        description: Current status of the fund.
+        tests:
+          - not_null
+
+      - name: load_date
+        description: Timestamp when the record was loaded.
+        tests:
+          - not_null
+
+  - name: stg_yardi_property
+    description: Staging model for Yardi property data.
+
+    columns:
+      - name: as_of_date
+        description: Reporting date for the property record.
+        tests:
+          - not_null
+
+      - name: company
+        description: Company managing the property.
+
+      - name: legal_entity_id
+        description: Legal entity identifier.
+
+      - name: legal_entity_name
+        description: Legal entity name.
+
+      - name: asset_id_reo
+        description: Unique property asset identifier.
+        tests:
+          - unique
+          - not_null
+
+      - name: asset_description
+        description: Description of the property asset.
+
+      - name: property_type
+        description: Type of property.
+
+      - name: location
+        description: Location of the property.
+
+      - name: state
+        description: US state where the property is located.
+
+      - name: total_debt
+        description: Total debt associated with the property.
+
+      - name: real_estate_market_value
+        description: Current market value of the property.
+
+      - name: strategy
+        description: Investment strategy for the property.
+
+      - name: fund_id
+        description: Foreign key to the associated fund.
+        tests:
+          - not_null
+
+      - name: load_date
+        description: Timestamp when the record was loaded.
+        tests:
+          - not_null
+
+  - name: stg_redrs_reo_loans
+    description: Staging model for REDRS REO loan data.
+
+    columns:
+      - name: as_of_date
+        description: Reporting date for the loan record.
+        tests:
+          - not_null
+
+      - name: loan_number
+        description: Unique loan identifier.
+        tests:
+          - unique
+          - not_null
+
+      - name: asset_id_reo
+        description: Property asset identifier linking to the property table.
+        tests:
+          - not_null
+
+      - name: asset_desc
+        description: Description of the loan asset.
+
+      - name: asset_mgr
+        description: Asset manager responsible for the loan.
+
+      - name: book_value_stat
+        description: Statistical book value of the loan.
+
+      - name: collateral_state
+        description: State where the loan collateral is located.
+
+      - name: collateral_type
+        description: Type of collateral securing the loan.
+
+      - name: load_date
+        description: Timestamp when the record was loaded.
+        tests:
+          - not_null

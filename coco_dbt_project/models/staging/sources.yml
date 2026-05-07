@@ -1,0 +1,174 @@
+version: 2
+
+sources:
+  - name: ENT_INV_TEST_RAW_DB__YARDI
+    database: ENT_INV_TEST_RAW_DB
+    schema: YARDI
+
+    tables:
+      - name: stg_yardi_fund
+        identifier: STG_YARDI_FUND
+        description: Raw fund data from the Yardi source system.
+
+        columns:
+          - name: fund_id
+            data_type: varchar(20)
+            description: Unique identifier for the fund.
+            tests:
+              - unique
+              - not_null
+
+          - name: fund_name
+            data_type: varchar(100)
+            description: Name of the fund.
+            tests:
+              - not_null
+
+          - name: legal_entity_name
+            data_type: varchar(150)
+            description: Legal entity name associated with the fund.
+
+          - name: vintage_year
+            data_type: number(4,0)
+            description: Year the fund was established.
+
+          - name: strategy
+            data_type: varchar(50)
+            description: Investment strategy of the fund.
+
+          - name: status
+            data_type: varchar(20)
+            description: Current status of the fund.
+            tests:
+              - not_null
+
+          - name: load_date
+            data_type: timestamp_ntz
+            description: Timestamp when the record was loaded.
+            tests:
+              - not_null
+
+      - name: stg_yardi_property
+        identifier: STG_YARDI_PROPERTY
+        description: Raw property data from the Yardi source system.
+
+        columns:
+          - name: as_of_date
+            data_type: date
+            description: Reporting date for the property record.
+            tests:
+              - not_null
+
+          - name: company
+            data_type: varchar(100)
+            description: Company managing the property.
+
+          - name: legal_entity_id
+            data_type: varchar(20)
+            description: Legal entity identifier.
+
+          - name: legal_entity_name
+            data_type: varchar(150)
+            description: Legal entity name.
+
+          - name: asset_id_reo
+            data_type: varchar(20)
+            description: Unique property asset identifier.
+            tests:
+              - unique
+              - not_null
+
+          - name: asset_description
+            data_type: varchar(200)
+            description: Description of the property asset.
+
+          - name: property_type
+            data_type: varchar(50)
+            description: Type of property.
+
+          - name: location
+            data_type: varchar(100)
+            description: Location of the property.
+
+          - name: state
+            data_type: varchar(2)
+            description: US state where the property is located.
+
+          - name: total_debt
+            data_type: number(18,2)
+            description: Total debt associated with the property.
+
+          - name: real_estate_market_value
+            data_type: number(18,2)
+            description: Current market value of the property.
+
+          - name: strategy
+            data_type: varchar(50)
+            description: Investment strategy for the property.
+
+          - name: fund_id
+            data_type: varchar(20)
+            description: Foreign key to the associated fund.
+            tests:
+              - not_null
+
+          - name: load_date
+            data_type: timestamp_ntz
+            description: Timestamp when the record was loaded.
+            tests:
+              - not_null
+
+  - name: ENT_INV_TEST_RAW_DB__LOANS
+    database: ENT_INV_TEST_RAW_DB
+    schema: LOANS
+
+    tables:
+      - name: stg_redrs_reo_loans
+        identifier: STG_REDRS_REO_LOANS
+        description: Raw REO loan data from the REDRS source system.
+
+        columns:
+          - name: as_of_date
+            data_type: date
+            description: Reporting date for the loan record.
+            tests:
+              - not_null
+
+          - name: loan_number
+            data_type: varchar(20)
+            description: Unique loan identifier.
+            tests:
+              - unique
+              - not_null
+
+          - name: asset_id_reo
+            data_type: varchar(20)
+            description: Property asset identifier linking to the property table.
+            tests:
+              - not_null
+
+          - name: asset_desc
+            data_type: varchar(200)
+            description: Description of the loan asset.
+
+          - name: asset_mgr
+            data_type: varchar(100)
+            description: Asset manager responsible for the loan.
+
+          - name: book_value_stat
+            data_type: number(18,2)
+            description: Statistical book value of the loan.
+
+          - name: collateral_state
+            data_type: varchar(2)
+            description: State where the loan collateral is located.
+
+          - name: collateral_type
+            data_type: varchar(50)
+            description: Type of collateral securing the loan.
+
+          - name: load_date
+            data_type: timestamp_ntz
+            description: Timestamp when the record was loaded.
+            tests:
+              - not_null

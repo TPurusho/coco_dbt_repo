@@ -1,0 +1,144 @@
+version: 2
+
+models:
+  - name: dim_property
+    description: Dimension table containing property details.
+
+    columns:
+      - name: asset_id_reo
+        description: Unique property asset identifier.
+        tests:
+          - unique
+          - not_null
+
+      - name: asset_description
+        description: Description of the property asset.
+
+      - name: property_type
+        description: Type of property.
+
+      - name: location
+        description: Location of the property.
+
+      - name: state
+        description: US state where the property is located.
+
+      - name: company
+        description: Company managing the property.
+
+      - name: property_strategy
+        description: Investment strategy for the property.
+
+      - name: fund_id
+        description: Foreign key to the associated fund.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_fund')
+              field: fund_id
+
+      - name: load_date
+        description: Timestamp when the record was loaded.
+
+  - name: dim_fund
+    description: Dimension table containing fund details.
+
+    columns:
+      - name: fund_id
+        description: Unique identifier for the fund.
+        tests:
+          - unique
+          - not_null
+
+      - name: fund_name
+        description: Name of the fund.
+        tests:
+          - not_null
+
+      - name: legal_entity_name
+        description: Legal entity name associated with the fund.
+
+      - name: vintage_year
+        description: Year the fund was established.
+
+      - name: fund_strategy
+        description: Investment strategy of the fund.
+
+      - name: fund_status
+        description: Current status of the fund.
+
+      - name: load_date
+        description: Timestamp when the record was loaded.
+
+  - name: fact_position_property
+    description: Fact table containing property financial positions including debt, market value, and loan details.
+
+    columns:
+      - name: asset_id_reo
+        description: Property asset identifier.
+        tests:
+          - not_null
+
+      - name: fund_id
+        description: Foreign key to the associated fund.
+        tests:
+          - not_null
+
+      - name: as_of_date
+        description: Reporting date for the position.
+        tests:
+          - not_null
+
+      - name: total_debt
+        description: Total debt associated with the property.
+
+      - name: real_estate_market_value
+        description: Current market value of the property.
+
+      - name: book_value_stat
+        description: Statistical book value of the loan.
+
+      - name: loan_number
+        description: Loan identifier.
+
+      - name: collateral_type
+        description: Type of collateral securing the loan.
+
+      - name: load_date
+        description: Timestamp when the record was loaded.
+
+  - name: investment_overview
+    description: Published view combining property dimensions with financial positions for reporting.
+
+    columns:
+      - name: asset_id_reo
+        description: Property asset identifier.
+        tests:
+          - not_null
+
+      - name: asset_description
+        description: Description of the property.
+
+      - name: property_type
+        description: Type of property.
+
+      - name: state
+        description: US state where the property is located.
+
+      - name: fund_name
+        description: Name of the associated fund.
+
+      - name: fund_strategy
+        description: Investment strategy of the fund.
+
+      - name: total_debt
+        description: Total debt associated with the property.
+
+      - name: real_estate_market_value
+        description: Current market value of the property.
+
+      - name: book_value_stat
+        description: Statistical book value of the loan.
+
+      - name: as_of_date
+        description: Reporting date for the position.
